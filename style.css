@@ -1,0 +1,178 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.game-board {
+  width: 100%;
+  height: 500px;
+  border-bottom: 20px solid rgb(36, 180, 36);
+  margin: 0 auto;
+  /* centraliza a div */
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(#87ceeb, #e0f6ff);
+  transition: background 1s ease-in-out;
+}
+
+.game-board.night {
+  background: linear-gradient(#1e1b44, #27496d);
+  color: white;
+}
+
+.score-container {
+  position: absolute;
+  right: 0;
+  display: flex;
+  margin-top: 30px;
+}
+
+.highScore,
+.score {
+  font-family: "Press Start 2P", cursive;
+  font-size: 18px;
+  padding-right: 30px;
+}
+
+.pokeball {
+  position: absolute;
+  bottom: 0;
+  right: -80px;
+  height: 80px;
+  width: 80px;
+}
+
+.pikachu {
+  position: absolute;
+  width: 150px;
+  bottom: 0;
+}
+
+.rocket-ballon {
+  position: absolute;
+  right: -250px;
+  width: 250px;
+  margin-top: 50px;
+}
+
+.jump {
+  animation: jump-animation 500ms ease-out;
+}
+
+.pokeball.animate {
+  animation: pokeball-animation 2s infinite linear;
+}
+
+.rocket-ballon.animate {
+  animation: rocketBallon-animation 20s infinite linear;
+}
+
+/* produz animaçoes */
+@keyframes pokeball-animation {
+  from {
+    right: -80px;
+  }
+
+  to {
+    right: 100%;
+  }
+}
+
+@keyframes jump-animation {
+  0% {
+    bottom: 0;
+  }
+
+  40% {
+    bottom: 180px;
+  }
+
+  50% {
+    bottom: 180px;
+  }
+
+  60% {
+    bottom: 180px;
+  }
+
+  100% {
+    bottom: 0;
+  }
+}
+
+@keyframes rocketBallon-animation {
+  from {
+    right: -450px;
+  }
+
+  to {
+    right: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  /* reduz a altura do jogo para mobile */
+  .game-board {
+    border-bottom: 10px solid rgb(36, 180, 36);
+    height: 300px;
+  }
+
+  .score-container {
+    margin-top: 10px;
+  }
+
+  .highScore,
+  .score {
+    font-size: 12px;
+    padding-right: 15px;
+  }
+
+  .pokeball {
+    height: 45px;
+    width: 45px;
+  }
+
+  .pikachu {
+    width: 80px;
+  }
+
+  .rocket-ballon {
+    width: 150px;
+    margin-top: 30px;
+  }
+
+  .jump {
+    animation: jump-animation 500ms ease-out;
+  }
+
+  .pokeball.animate {
+    animation: pokeball-animation 1.5s infinite linear;
+  }
+
+  .rocket-ballon.animate {
+    animation: rocketBallon-animation 15s infinite linear;
+  }
+
+  @keyframes jump-animation {
+    0% {
+      bottom: 0;
+    }
+
+    30% {
+      bottom: 100px;
+    }
+
+    50% {
+      bottom: 100px;
+    }
+
+    70% {
+      bottom: 100px;
+    }
+
+    100% {
+      bottom: 0;
+    }
+  }
+}
