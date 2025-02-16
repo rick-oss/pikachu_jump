@@ -9,6 +9,7 @@ let changeSchedule = 0;
 let gameLoopInterval;
 
 let isGamingRunning = false;
+let isAnimationRunning = false;
 let gameOver = false;
 let isDay = true;
 
@@ -18,15 +19,32 @@ const scoreUpdateInterval = 20;
 let currentRotation = 360;
 const degreesPerFrame = 3.6;
 
-let frameIndex = 0;
-const totalFrames = 4;
-
 function jump() {
   pikachu.classList.add("jump");
 
   setTimeout(() => {
     pikachu.classList.remove("jump");
   }, 550);
+}
+
+function animatePikachu() {
+  if (isAnimationRunning) return; // Se já estiver rodando sai da função
+
+  isAnimationRunning = true;
+  let frameIndex = 0;
+  const totalFrames = 4;
+  const frameWidth = 125;
+
+  const interval = setInterval(() => {
+    if (gameOver) {
+      clearInterval(interval);
+      isAnimationRunning = false;
+      return;
+    }
+
+    frameIndex = (frameIndex + 1) % totalFrames;
+    pikachu.style.backgroundPosition = `-${frameIndex * frameWidth}px 0`;
+  }, 130);
 }
 
 function formatScore(score) {
@@ -109,6 +127,7 @@ function checkCollisions() {
     // Muda a imagem do pikachu para o game over
     pikachu.style.backgroundImage = "url('/imagens/game-over.png')";
     pikachu.style.backgroundSize = "cover";
+    pikachu.style.backgroundPosition = "center";
 
     /*Telas menores*/
     if (screenWidth < 768) {
@@ -126,10 +145,7 @@ function gameLoop() {
     // Add as animações
     pokeball.classList.add("animate");
     rocketBallon.classList.add("animate");
-
-    if (!pikachu.classList.contains("jump")) {
-      pikachu.classList.add("animate");
-    }
+    animatePikachu();
 
     updateRotation();
     checkCollisions();
@@ -145,7 +161,6 @@ function gameLoop() {
       switch (event.key) {
         case "j":
         case "ArrowUp":
-          pikachu.classList.remove("animate");
           jump();
           break;
       }
@@ -169,6 +184,7 @@ function startGame() {
   document.querySelector(".highScore").textContent = `HS:${formatScore(highScore)}`;
 
   // Remove o estilo de game over do Pikachu
+  pikachu.style.backgroundPosition = "";
   pikachu.style.backgroundImage = "url(/imagens/spritesheet.png)";
   pikachu.style.width = "";
   pikachu.style.height = "";
