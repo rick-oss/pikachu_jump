@@ -45,7 +45,11 @@
 
 .pikachu {
   position: absolute;
-  width: 150px;
+  width: 125px;
+  height: 100px;
+  background-image: url("/imagens/pikachu.png");
+  background-size: cover;
+  background-repeat: no-repeat;
   bottom: 0;
 }
 
@@ -56,8 +60,8 @@
   margin-top: 50px;
 }
 
-.jump {
-  animation: jump-animation 500ms ease-out;
+.pikachu.jump {
+  animation: jump-animation 550ms ease-out;
 }
 
 .pokeball.animate {
@@ -68,6 +72,10 @@
   animation: rocketBallon-animation 20s infinite linear;
 }
 
+.pikachu.animate {
+  animation: pikachu-animation 0.5s steps(4) infinite;
+}
+
 /* produz animaçoes */
 @keyframes pokeball-animation {
   from {
@@ -76,6 +84,15 @@
 
   to {
     right: 100%;
+  }
+}
+
+@keyframes pikachu-animation {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -500px 0;
   }
 }
 
