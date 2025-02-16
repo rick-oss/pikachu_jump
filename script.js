@@ -209,9 +209,16 @@ function startGame() {
   gameBoard.classList.remove("night");
 }
 
+// Inicia o jogo
 document.addEventListener("keydown", function (event) {
   if (event.key === "Enter" && !isGamingRunning) {
-    // Inicia o jogo
+    startGame();
+  }
+});
+
+// Inicia o jogo em dispositivos móveis
+document.addEventListener("touchstart", () => {
+  if (!isGamingRunning) {
     startGame();
   }
 });
