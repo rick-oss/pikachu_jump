@@ -32,7 +32,7 @@
 .score {
   font-family: "Press Start 2P", cursive;
   font-size: 18px;
-  padding-right: 30px;
+  margin-right: 30px;
 }
 
 .pokeball {
@@ -72,10 +72,6 @@
   animation: rocketBallon-animation 20s infinite linear;
 }
 
-.pikachu.animate {
-  animation: pikachu-animation 0.5s steps(4) infinite;
-}
-
 /* produz animaçoes */
 @keyframes pokeball-animation {
   from {
@@ -84,15 +80,6 @@
 
   to {
     right: 100%;
-  }
-}
-
-@keyframes pikachu-animation {
-  from {
-    background-position: 0 0;
-  }
-  to {
-    background-position: -500px 0;
   }
 }
 
