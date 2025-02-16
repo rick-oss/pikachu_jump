@@ -18,12 +18,15 @@ const scoreUpdateInterval = 20;
 let currentRotation = 360;
 const degreesPerFrame = 3.6;
 
+let frameIndex = 0;
+const totalFrames = 4;
+
 function jump() {
   pikachu.classList.add("jump");
 
   setTimeout(() => {
     pikachu.classList.remove("jump");
-  }, 500);
+  }, 550);
 }
 
 function formatScore(score) {
@@ -104,7 +107,10 @@ function checkCollisions() {
     pikachu.style.bottom = `${pikachuPosition}px`;
 
     // Muda a imagem do pikachu para o game over
-    pikachu.src = "./imagens/game-over.png";
+    pikachu.style.backgroundImage = "url('/imagens/game-over.png')";
+    pikachu.style.backgroundSize = "cover";
+
+    /*Telas menores*/
     if (screenWidth < 768) {
       pikachu.style.width = "80px";
     } else {
@@ -117,11 +123,13 @@ function checkCollisions() {
 
 function gameLoop() {
   if (!gameOver) {
-    pikachu.src = "./imagens/pikachu.gif";
-
     // Add as animações
     pokeball.classList.add("animate");
     rocketBallon.classList.add("animate");
+
+    if (!pikachu.classList.contains("jump")) {
+      pikachu.classList.add("animate");
+    }
 
     updateRotation();
     checkCollisions();
@@ -137,6 +145,7 @@ function gameLoop() {
       switch (event.key) {
         case "j":
         case "ArrowUp":
+          pikachu.classList.remove("animate");
           jump();
           break;
       }
@@ -160,7 +169,7 @@ function startGame() {
   document.querySelector(".highScore").textContent = `HS:${formatScore(highScore)}`;
 
   // Remove o estilo de game over do Pikachu
-  pikachu.src = "./imagens/pikachu.gif"; // Caminho original da imagem
+  pikachu.style.backgroundImage = "url(/imagens/spritesheet.png)";
   pikachu.style.width = "";
   pikachu.style.height = "";
   pikachu.style.bottom = "";
