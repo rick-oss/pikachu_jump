@@ -165,6 +165,12 @@ function gameLoop() {
           break;
       }
     });
+
+    if ("ontouchstart" in window) {
+      document.addEventListener("touchstart", function () {
+        jump();
+      });
+    }
   }
 }
 
